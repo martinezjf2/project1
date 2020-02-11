@@ -8,7 +8,6 @@ class Countries::Country
     @@countries =[]
 
     def initialize(attributes)
-        
         attributes.each do |key, value|
             begin
             self.send("#{key}=", value)
@@ -22,7 +21,8 @@ class Countries::Country
         @@countries
     end
 
-    def self.find_by_name(country)
+    def self.find_by_name(name)
+        @@countries.detect { |country| country.name == name}
     end
 
     

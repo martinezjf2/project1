@@ -12,16 +12,6 @@ class Countries::API
     end
 end
 
-
-
-
-
-
-
-
-
-
-
     
     # def country #iterate through just to get the country name
     # end
