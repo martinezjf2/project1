@@ -7,6 +7,7 @@ class Countries::CountriesController
         puts "
         ________________Welcome to the Countries CLI APP!__________________"
         self.get_country
+        self.end_program
         # invalid_input
         
     end
@@ -18,36 +19,52 @@ class Countries::CountriesController
 
     
     def get_country
-    
         puts "
         __________What place would you like to learn about today?__________"                                                                                    
-        input = gets.chomp
+        input = gets.chomp.downcase
+        # binding.pry
+        @country = Countries::Country.find_by_name(input)
+            #if input valid?
+                puts "
+                You have chosen #{@country.name}. Type D for description, or Type exit" 
+                input = gets.chomp
+                if input == "D"
+                display_description
+                get_country
 
-        Countries::Country.find_by_name(input)
-        puts "
-        You have chosen #{input}. Would you like to see a description? Y/N?" 
-        input.display_description
-        
-        # Countries::Country.find_by_name(name) #how would i get the user to recieve the country of which they input?
+                elsif input == "exit"
+                end_program
 
-        # find_by_name method from the input and 
+                else input == invalid_input
+                    #Type D for description, or type exit.
+
+
+                end
+            #end
         # then ask if they want any description, show description, 
         # "Type "D" for Description, or exit"
 
-        #display_country_info unless input == country
+        #display_description unless input == country
     end
 
     def display_description
-
-        
-
-
+        puts "You have chosen #{@country.name}. The capital of #{@country.name} is #{@country.capital}.
+              Population is about #{@country.population} people, with a timezone of about #{@country.timezones}."
     end
 
+    def end_program
+        puts "Thank You! See You Soon!" unless input == "exit"
+    end
+
+    def valid?
 
 
 
 
+        #would have to be valid if the country is present within the hash of countries.
+        #if not valid, should puts out and invalid response, "Invalid Response," and then run the get_country method to restart the method again.
+
+    end
 
 
 
@@ -56,11 +73,7 @@ class Countries::CountriesController
     def invalid_input
     end
 
-    def valid?
-        #would have to be valid if the country is present within the hash of countries.
-        #if not valid, should puts out and invalid response, "Invalid Response," and then run the get_country method to restart the method again.
-
-    end
+    
 
 
     

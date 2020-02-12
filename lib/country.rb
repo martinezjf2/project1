@@ -22,7 +22,7 @@ class Countries::Country
     end
 
     def self.find_by_name(name)
-        @@countries.detect { |country| country.name == name}
+        @@countries.detect { |country| country.name.downcase == name}
     end
 
     
