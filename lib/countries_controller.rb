@@ -4,8 +4,12 @@ class Countries::CountriesController
 
     def run
         self.create_country
-        puts "
-        ________________Welcome to the Countries CLI APP!__________________"
+        puts ""
+        puts "==================================================================="
+        puts "________________Welcome to the Countries CLI APP!__________________"
+        puts "==================================================================="
+        puts ""
+
         self.get_country
         self.end_program
         # invalid_input
@@ -19,41 +23,65 @@ class Countries::CountriesController
 
     
     def get_country
-        puts "
-        __________What place would you like to learn about today?__________"                                                                                    
+        puts ""
+        puts "==================================================================="
+        puts "__________What place would you like to learn about today?__________"
+        puts "===================================================================" 
+        puts ""                                                                                   
         input = gets.chomp.downcase
-        # binding.pry
         @country = Countries::Country.find_by_name(input)
-            #if input valid?
-                puts "
-                You have chosen #{@country.name}. Type D for description, or Type exit" 
-                input = gets.chomp
-                if input == "D"
-                display_description
+        #You need to check if the input that a user gives for a country name IS a name of a country, make a valid method
+            #if valid(country)?
+                puts ""
+                puts "======================================================================================"
+                puts "________You have chosen #{@country.name}. Type D for description, or Type Exit________" 
+                puts "======================================================================================"
+                puts ""
+
+                input = gets.chomp.capitalize
+                display_description if input == "D" 
                 get_country
-
-                elsif input == "exit"
+                end_program if input == "Exit"
                 end_program
+                
 
-                else input == invalid_input
-                    #Type D for description, or type exit.
-
-
-                end
-            #end
-        # then ask if they want any description, show description, 
+                # else input == invalid_input
+                   
         # "Type "D" for Description, or exit"
 
-        #display_description unless input == country
+
     end
 
     def display_description
-        puts "You have chosen #{@country.name}. The capital of #{@country.name} is #{@country.capital}.
-              Population is about #{@country.population} people, with a timezone of about #{@country.timezones}."
+        puts ""
+        puts "You have chosen #{@country.name}. The capital of #{@country.name} is #{@country.capital}."
+        puts "Population is about #{@country.population} people, with a timezone of about #{@country.timezones}."
+        puts ""
+        puts ""
+        puts "===================================================================================================================="
+        puts "Would you like to learn more about a different country? Type Y For Another Country, or Exit To Leave The Application"
+        puts "===================================================================================================================="
+        puts ""
+        input = gets.chomp.capitalize
+        if input == "Y"
+            get_country
+        else input == "exit" #this wont work if i type exit
+        end_program
+        end
+
     end
 
     def end_program
-        puts "Thank You! See You Soon!" unless input == "exit"
+        input = gets.chomp.downcase
+        if input == "Exit"
+            puts "========================"
+            puts "Thank You! See You Soon!"
+            puts "========================"
+            puts ""
+            exit
+        else
+        end
+
     end
 
     def valid?
@@ -62,7 +90,8 @@ class Countries::CountriesController
 
 
         #would have to be valid if the country is present within the hash of countries.
-        #if not valid, should puts out and invalid response, "Invalid Response," and then run the get_country method to restart the method again.
+        #if not valid, should puts out and invalid response, "Invalid Response," and then r
+        #un the get_country method to restart the method again.
 
     end
 
