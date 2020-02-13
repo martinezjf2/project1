@@ -25,13 +25,4 @@ class Countries::Country
         @@countries.detect { |country| country.name.downcase == name}
     end
 
-    
-
-
-    # def display_regions
-    # end
-
-    # def country
-    # end
-
 end
