@@ -27,17 +27,22 @@ class Countries::CountriesController
         input = gets.chomp.downcase
 
             if valid(input)
-                puts ""
-                puts "============================================================================================"
-                puts "  -------- You have chosen #{@country.name}. Type D for description, or Type Exit --------" 
-                puts "============================================================================================"
-                puts ""
-                check_input    
+                description_info 
             elsif input == "exit"
                 end_program
             else 
                 invalid_input
+                get_country
             end
+    end
+
+    def description_info
+        puts ""
+        puts "============================================================================================"
+        puts "  -------- You have chosen #{@country.name}. Type D for description, or Type Exit --------" 
+        puts "============================================================================================"
+        puts ""
+        check_input 
     end
 
     def check_input
@@ -46,8 +51,11 @@ class Countries::CountriesController
             display_description
         elsif input == 'exit'
             end_program
+        else
+            invalid_input
+            description_info
         end 
-    end 
+    end
 
     def display_description
         puts ""
@@ -73,6 +81,7 @@ class Countries::CountriesController
             puts "  -------- Thank You! See You Soon! --------  "
             puts "=============================================="
             puts ""
+            puts ""
     end
 
     def valid(input)
@@ -85,7 +94,6 @@ class Countries::CountriesController
         
     def invalid_input
         puts "Sorry, I did not understand what you want."
-        get_country
     end
 end
 
